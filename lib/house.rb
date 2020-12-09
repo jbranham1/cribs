@@ -22,4 +22,18 @@ class House
       room.category == category
     end
   end
+
+  def area
+    @rooms.map do |room|
+      room.area
+    end.sum
+  end
+
+  def details
+    hash = {
+      "price" => @price,
+      "address" => @address
+    }
+
+  end
 end
