@@ -89,4 +89,20 @@ class HouseTest < MiniTest::Test
 
     assert_equal 210.52, house.round_price(210.52376)
   end
+
+  def test_rooms_sorted_by_area
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, '13')
+    room_2 = Room.new(:bedroom, 11, '15')
+    room_3 = Room.new(:living_room, 25, '15')
+    room_4 = Room.new(:basement, 30, '41')
+
+    house.add_room(room_1)
+    house.add_room(room_4)
+    house.add_room(room_3)
+    house.add_room(room_2)
+    rooms_sorted = [room_1, room_2, room_3, room_4]
+    assert_equal rooms_sorted, house.rooms_sorted_by_area
+
+  end
 end
