@@ -98,11 +98,48 @@ class HouseTest < MiniTest::Test
     room_4 = Room.new(:basement, 30, '41')
 
     house.add_room(room_1)
-    house.add_room(room_4)
-    house.add_room(room_3)
     house.add_room(room_2)
-    rooms_sorted = [room_1, room_2, room_3, room_4]
+    house.add_room(room_3)
+    house.add_room(room_4)
+    rooms_sorted = [room_4, room_3, room_2, room_1]
     assert_equal rooms_sorted, house.rooms_sorted_by_area
+  end
 
+  def test_rooms_by_category
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, '13')
+    room_2 = Room.new(:bedroom, 11, '15')
+    room_3 = Room.new(:living_room, 25, '15')
+    room_4 = Room.new(:basement, 30, '41')
+
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    expected_hash =
+    {
+      bedroom: [room_1, room_2],
+      living_room: [room_3],
+      basement: [room_4]
+    }
+
+    assert_equal expected_hash, house.rooms_by_category
+  end
+
+  def test_get_unique_categories
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, '13')
+    room_2 = Room.new(:bedroom, 11, '15')
+    room_3 = Room.new(:living_room, 25, '15')
+    room_4 = Room.new(:basement, 30, '41')
+
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    categories = [:bedroom, :living_room, :basement]
+    assert_equal categories, house.get_unique_categories
   end
 end
