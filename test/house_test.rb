@@ -134,10 +134,10 @@ class HouseTest < MiniTest::Test
     room_3 = Room.new(:living_room, 25, '15')
     room_4 = Room.new(:basement, 30, '41')
 
-    house.add_room(room_1)
-    house.add_room(room_2)
-    house.add_room(room_3)
     house.add_room(room_4)
+    house.add_room(room_1)
+    house.add_room(room_3)
+    house.add_room(room_2)
 
     categories = [:bedroom, :living_room, :basement]
     assert_equal categories, house.get_unique_categories

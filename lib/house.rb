@@ -57,7 +57,7 @@ class House
   end
 
   def get_unique_categories
-    categories = @rooms.map {|room| room.category}.uniq
+    categories = rooms_sorted_by_area.map {|room| room.category}.uniq
   end
 
 end
